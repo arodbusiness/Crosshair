@@ -21,7 +21,25 @@ IniRead, b, %FileSettings%, Main, B
 
 
 GoSub, drawReticle
+ReticleDrawn := 1
 
+
+Loop
+{
+	if (WinActive("ahk_class UnrealWindow"))
+	{
+		if(!ReticleDrawn)
+		{
+			GoSub, drawReticle
+			ReticleDrawn := 1
+		}
+	}
+	else
+	{
+		Gui, 1:Destroy
+		ReticleDrawn := 0
+	}
+}
 Return
 
 ~d & UP::
